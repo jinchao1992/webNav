@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no,
+   initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>前端导航</title>
+  <link rel="stylesheet" href="./style.css">
+  <style type="text/css">
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="global-header">
+    <form action="https://www.baidu.com/s" class="search-form" method="GET">
+      <input type="text" class="search-text" name="wd" placeholder="百度一下">
+      <button type="submit" class="search-btn">搜索</button>
+    </form>
+  </header>
+  <main class="global-content">
+    <ul class="site-list">
+      <li class="site-item">
+        <a href="https://juejin.im">
+          <div class="website">
+            <p class="logo">
+              <img src="./images/juejin.svg" alt="">
+            </p>
+            <span class="title">juejin.im</span>
+          </div>
+        </a>
+      </li>
+      <li class="site-item">
+        <a href="https://segmentfault.com/">
+          <div class="website">
+            <p class="logo">
+              <img src="./images/sifou.png" alt="">
+            </p>
+            <span class="title">segmentfault.com</span>
+          </div>
+        </a>
+      </li>
+      <li class="site-item">
+        <div class="add-wrap">
+          <div class="icon-wrap">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tianjia"></use>
+            </svg>
+          </div>
+          <span class="text">添加网址</span>
+        </div>
+      </li>
+    </ul>
+  </main>
+  <script src="//at.alicdn.com/t/font_1539506_sw6u92b2yvc.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="./main.js"></script>
+</body>
+
+</html>
