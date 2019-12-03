@@ -1,13 +1,16 @@
+import juejin from './images/juejin.svg'
+import sifou from './images/sifou.png'
+
 const $siteList = $('.site-list')
 const $lastLi = $('.site-item').last()
 const data = JSON.parse(localStorage.getItem('hasMap')) || [
   {
-    logo: './images/juejin.svg',
+    logo: juejin,
     logoType: 'img',
     url: 'https://juejin.im'
   },
   {
-    logo: './images/sifou.png',
+    logo: sifou,
     logoType: 'img',
     url: 'https://segmentfault.com'
   }
@@ -16,21 +19,35 @@ const hasMap = data
 
 const render = () => {
   $siteList.find('li:not(:last())').remove()
-  hasMap.forEach(node => {
+  hasMap.forEach((node, index) => {
     const $li = $(`<li class="site-item">
       <a href="${node.url}">
         <div class="website">
           <p class="logo">
-            ${node.logoType === 'img' ? '<img src="' + node.logo + '">' : node.url[0]}
+            ${node.logoType === 'img' ? '<img src="' + node.logo + '">' : parseUrl(node.url)[0]}
           </p>
-          <span class="title">${node.url}</span>
+          <span class="title">${parseUrl(node.url)}</span>
+          <span class="close">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-hebingxingzhuang"></use>
+            </svg>
+          </span>
         </div>
       </a>
     </li>`)
     $li.insertBefore($lastLi)
+    $li.on('click', '.close', (e) => {
+      e.preventDefault();
+      hasMap.splice(index, 1);
+      render()
+    })
     const string = JSON.stringify(hasMap)
     localStorage.setItem('hasMap', string)
   })
+}
+
+const parseUrl = (url) => {
+  return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, '')
 }
 
 render()
@@ -41,7 +58,7 @@ $('.add-wrap').on('click', function () {
     url = `https://${url}`
   }
   hasMap.push({
-    logo: url[0],
+    logo: parseUrl(url)[0],
     logoType: 'text',
     url
   })
@@ -49,7 +66,7 @@ $('.add-wrap').on('click', function () {
 })
 
 // 页面关闭之前触发
-window.onbeforeunload = function () {
-  const string = JSON.stringify(hasMap)
-  localStorage.setItem('hasMap', string)
-}
+// window.onbeforeunload = function () {
+//   const string = JSON.stringify(hasMap)
+//   localStorage.setItem('hasMap', string)
+// }
