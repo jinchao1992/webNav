@@ -64,6 +64,13 @@ body {
 .global-content {
   margin: 20px;
 }
+@media (min-width:769px) {
+  .global-content {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 .site-list {
   display: flex;
   flex-wrap: wrap;
@@ -72,11 +79,18 @@ body {
 @media (min-width: 769px) {
   .site-list {
     justify-content: flex-start;
+    margin-right: -25px;
   }
 }
 .site-item {
   margin-bottom:10px;
   cursor: pointer;
+}
+@media (min-width: 769px) {
+  .site-item {
+    margin-right: 25px;
+    margin-bottom: 25px;
+  }
 }
 .site-item a {
   color: #000;
@@ -100,6 +114,16 @@ body {
   top: 0;
   right: 8px;
   font-size: 26px;
+}
+
+@media (min-width: 769px) {
+  .close {
+    transition: opacity .5s;
+    opacity: 0;
+  }
+  .site-item:hover .close {
+    opacity: 1;
+  } 
 }
 
 .logo {

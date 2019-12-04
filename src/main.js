@@ -45,13 +45,10 @@ const render = () => {
     localStorage.setItem('hasMap', string)
   })
 }
-
 const parseUrl = (url) => {
   return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, '')
 }
-
 render()
-
 $('.add-wrap').on('click', function () {
   let url = window.prompt('请输入要添加的网址')
   if (url.indexOf('http') !== 0) {
@@ -64,6 +61,22 @@ $('.add-wrap').on('click', function () {
   })
   render()
 })
+
+$(document).on('keyup', function (e) {
+  const { key } = e
+  console.log(hasMap)
+  hasMap.forEach((item) => {
+    if (key === item.logo) {
+      window.open(item.url)
+    }
+  })
+})
+
+$('.search-text').on('keyup', function (e) {
+  e.stopPropagation();
+})
+
+$('.site-list').sortable().disableSelection();
 
 // 页面关闭之前触发
 // window.onbeforeunload = function () {
