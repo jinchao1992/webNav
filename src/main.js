@@ -17,6 +17,14 @@ const data = JSON.parse(localStorage.getItem('hasMap')) || [
 ]
 const hasMap = data
 
+let timer = null
+
+let startTime = null
+
+let endTime = null
+
+let isMove = false
+
 const render = () => {
   $siteList.find('li:not(:last())').remove()
   hasMap.forEach((node, index) => {
@@ -37,9 +45,29 @@ const render = () => {
     </li>`)
     $li.insertBefore($lastLi)
     $li.on('click', '.close', (e) => {
-      e.preventDefault();
-      hasMap.splice(index, 1);
+      e.preventDefault()
+      hasMap.splice(index, 1)
       render()
+    })
+    $li.on('touchstart', function (e) {
+      startTime = +new Date()
+      timer = setTimeout(() => {
+        $($('.close').get(index)).addClass('close-hover')
+        $li.addClass('move')
+      }, 700)
+    })
+    $li.on('touchmove', function (e) {
+      if (e.changedTouches[0].clientY > 10) {
+        clearTimeout(timer)
+      }
+    })
+    $li.on('touchend', function () {
+      endTime = +new Date()
+      clearTimeout(timer)
+      if (endTime - startTime < 700) {
+        $('.close').removeClass('close-hover')
+        $li.removeClass('move')
+      }
     })
     const string = JSON.stringify(hasMap)
     localStorage.setItem('hasMap', string)
@@ -51,6 +79,10 @@ const parseUrl = (url) => {
 render()
 $('.add-wrap').on('click', function () {
   let url = window.prompt('请输入要添加的网址')
+  if (url === '') {
+    alert('url不能为空')
+    return
+  }
   if (url.indexOf('http') !== 0) {
     url = `https://${url}`
   }
@@ -64,12 +96,16 @@ $('.add-wrap').on('click', function () {
 
 $(document).on('keyup', function (e) {
   const { key } = e
-  console.log(hasMap)
   hasMap.forEach((item) => {
     if (key === item.logo) {
       window.open(item.url)
     }
   })
+})
+
+$(document).on('click', function () {
+  $('.site-item').removeClass('move')
+  $('.site-item .close').removeClass('close-hover')
 })
 
 $('.search-text').on('keyup', function (e) {
@@ -83,3 +119,21 @@ $('.site-list').sortable().disableSelection();
 //   const string = JSON.stringify(hasMap)
 //   localStorage.setItem('hasMap', string)
 // }
+
+$(document).on('scroll', function () {
+  const scrollTop = $(this).scrollTop()
+  const $header = $('.global-header')
+  const $fixedHeader = $('.fixed-header')
+  const $headerTop = $header.offset().top
+  if (scrollTop > $headerTop) {
+    // $header.hide()
+    $fixedHeader.show()
+    // $('.bg').show()
+  }
+
+  if (scrollTop === 0) {
+    // $header.show()
+    $fixedHeader.hide()
+    // $('.bg').hide()
+  }
+})

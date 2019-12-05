@@ -3,8 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no,
-   initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>前端导航</title>
   <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
@@ -27,6 +26,12 @@
       <button type="submit" class="search-btn">搜索</button>
     </form>
   </header>
+  <div class="fixed-header">
+    <form action="https://www.baidu.com/s" class="search-form" method="GET">
+      <input type="text" class="search-text" name="wd" placeholder="百度一下">
+      <button type="submit" class="search-btn">搜索</button>
+    </form>
+  </div>
   <main class="global-content">
     <ul class="site-list">
       <li class="site-item">
