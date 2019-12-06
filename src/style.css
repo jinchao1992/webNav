@@ -22,8 +22,21 @@ ol {
 a {
   text-decoration: none;
 }
+a, button {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 body {
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 1px 0;
   background-color: #E5E5E5;
+  background-image: url(http://jianfast.com/images/bg/bg009.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 /*site*/
@@ -166,6 +179,15 @@ body {
   border-radius: 4px;
   padding: 20px 0;
   position: relative;
+  box-shadow: 0 3px 6px rgba(0,0,0,.1);
+}
+@media (min-width: 769px) {
+  .site-item .website {
+    background-color: rgba(255,255,255,.95);
+  }
+  .site-item:hover .website {
+    background-color: rgba(255,255,255, 1);
+  }
 }
 .close {
   position: absolute;
@@ -215,4 +237,118 @@ body {
   flex-direction: column;
   justify-content: center;
   font-size: 64px;
+}
+
+.sildebar {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  z-index: 4;
+}
+.sildebar .btn {
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+.sildebar .btn a {
+  display: block;
+  color: rgba(0, 0, 0, .75);
+  transition: color .5s ease-in-out;
+}
+@media (min-width: 769px) {
+  .sildebar .btn a {
+    color: rgba(255, 255, 255, .75);
+  }
+}
+.sildebar .btn a:hover {
+  display: block;
+  color: rgba(255, 255, 255, 1);
+}
+.sildebar .btn .icon {
+  width: 24px;
+  height: 24px;
+}
+.sildebar .btn:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+/*弹框*/
+.popup-box-wrap {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, .45);
+  display: none;
+}
+.popup-box {
+  min-width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.3);
+}
+@media (min-width: 769px) {
+  .popup-box {
+    min-width: 500px;
+  }
+}
+.popup-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #4d4d4d;
+  margin-bottom: 15px;
+}
+.form-item input[type="text"] {
+  border: none;
+  font-size: 14px;
+  margin-left: 10px;
+}
+.form-item:last-child {
+  border-bottom: none;
+  align-self: flex-end;
+  margin-bottom: 0;
+}
+.form-item button {
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: all .3s ease-in-out;
+}
+.form-item button:first-child {
+  margin-right: 15px;
+}
+.form-item .btn-ok {
+  background-color: #409eff;
+  border-color: #409eff;
+  color: #fff;
+}
+.form-item button:focus, 
+.form-item button:hover {
+  color: #409eff;
+  border-color: #c6e2ff;
+  background-color: #ecf5ff;
+}
+.form-item .btn-ok:focus,
+.form-item .btn-ok:hover {
+  background: #66b1ff;
+  border-color: #66b1ff;
+  color: #fff;
 }

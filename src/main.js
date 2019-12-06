@@ -126,14 +126,10 @@ $(document).on('scroll', function () {
   const $fixedHeader = $('.fixed-header')
   const $headerTop = $header.offset().top
   if (scrollTop > $headerTop) {
-    // $header.hide()
     $fixedHeader.show()
-    // $('.bg').show()
   }
 
   if (scrollTop === 0) {
-    // $header.show()
     $fixedHeader.hide()
-    // $('.bg').hide()
   }
 })
