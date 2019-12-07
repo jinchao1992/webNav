@@ -76,22 +76,57 @@ const render = () => {
 const parseUrl = (url) => {
   return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, '')
 }
+
+const handleCancel = () => {
+  $('.popup-box-wrap').fadeOut()
+  $('.popup-box').css({
+    'opacity': 0,
+    'transform': 'translate3d(-50%, -150%, 0)'
+  })
+  clearText()
+}
+
+const clearText = () => {
+  $('#url').val('')
+  $('#logo').val('')
+}
+
 render()
 $('.add-wrap').on('click', function () {
-  let url = window.prompt('请输入要添加的网址')
-  if (url === '') {
+  $('.popup-box-wrap').fadeIn()
+  $('.popup-box').css({
+    'opacity': 1,
+    'transform': 'translate3d(-50%, -50%, 0)'
+  })
+})
+
+$('.btn-ok').on('click', function () {
+  // let url = window.prompt('请输入要添加的网址')
+  const $url = $('#url')
+  const $logo = $('#logo')
+  let $urlVal = $url.val()
+  let $logoVal = $logo.val()
+
+  if ($urlVal === '') {
     alert('url不能为空')
     return
   }
-  if (url.indexOf('http') !== 0) {
-    url = `https://${url}`
+  if ($urlVal.indexOf('http') !== 0) {
+    $urlVal = `https://${$urlVal}`
   }
   hasMap.push({
-    logo: parseUrl(url)[0],
-    logoType: 'text',
-    url
+    logo: !$logoVal ? parseUrl($urlVal)[0] : $logoVal,
+    logoType: !$logoVal ? 'text' : 'img',
+    url: $urlVal
   })
   render()
+  handleCancel()
+})
+
+$('.btn-cancel').on('click', handleCancel)
+
+$('.popup-box-wrap').on('keyup', '#url', '#logo', function (e) {
+  e.stopPropagation()
 })
 
 $(document).on('keyup', function (e) {
@@ -112,7 +147,22 @@ $('.search-text').on('keyup', function (e) {
   e.stopPropagation();
 })
 
-$('.site-list').sortable().disableSelection();
+let startIndex
+let endIndex
+
+$('.site-list').sortable({
+  containment: 'parent',
+  cursor: 'move',
+  start(ev, { item }) {
+    startIndex = $(item).index()
+  },
+  stop(ev, { item }) {
+    endIndex = $(item).index()
+    hasMap.splice(endIndex, 1, ...hasMap.splice(startIndex, 1, hasMap[endIndex]));
+    render()
+
+  }
+}).disableSelection()
 
 // 页面关闭之前触发
 // window.onbeforeunload = function () {

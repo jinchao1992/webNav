@@ -159,9 +159,6 @@ body {
   .site-item:hover {
     transform: translate3d(0, -10px, 0);
   }
-  .site-item:hover a {
-    cursor: move;
-  }
 }
 .site-item a {
   color: #000;
@@ -198,6 +195,7 @@ body {
   transform: scale(0);
   transition: transform .3s ease-in-out;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .close-hover {
@@ -283,16 +281,19 @@ body {
   z-index: 10;
   background-color: rgba(0, 0, 0, .45);
   display: none;
+  transition: all .5s ease-in-out;
 }
 .popup-box {
   min-width: 300px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -150%, 0);
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,.3);
+  transition: all .5s ease-in-out;
+  opacity: 0;
 }
 @media (min-width: 769px) {
   .popup-box {
@@ -312,11 +313,14 @@ body {
   font-size: 14px;
   color: #4d4d4d;
   margin-bottom: 15px;
+  white-space: nowrap;
 }
 .form-item input[type="text"] {
   border: none;
   font-size: 14px;
   margin-left: 10px;
+  width: 100%;
+  height: 100%;
 }
 .form-item:last-child {
   border-bottom: none;
