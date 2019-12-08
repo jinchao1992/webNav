@@ -1,5 +1,11 @@
 import juejin from './images/juejin.svg'
 import sifou from './images/sifou.png'
+import vue from './images/Vue.png'
+import react from './images/React.png'
+import angular from './images/Angular.png'
+import antDesign from './images/ant design.svg'
+import iview from './images/iview.svg'
+import element from './images/element.png'
 
 const $siteList = $('.site-list')
 const $lastLi = $('.site-item').last()
@@ -13,7 +19,37 @@ const data = JSON.parse(localStorage.getItem('hasMap')) || [
     logo: sifou,
     logoType: 'img',
     url: 'https://segmentfault.com'
-  }
+  },
+  {
+    logo: vue,
+    logoType: 'img',
+    url: 'https://cn.vuejs.org/'
+  },
+  {
+    logo: react,
+    logoType: 'img',
+    url: 'https://zh-hans.reactjs.org/'
+  },
+  {
+    logo: angular,
+    logoType: 'img',
+    url: 'https://angular.io/'
+  },
+  {
+    logo: antDesign,
+    logoType: 'img',
+    url: 'https://ant.design/index-cn'
+  },
+  {
+    logo: iview,
+    logoType: 'img',
+    url: 'https://www.iviewui.com/'
+  },
+  {
+    logo: element,
+    logoType: 'img',
+    url: 'https://element.eleme.io/#/zh-CN'
+  },
 ]
 const hasMap = data
 
