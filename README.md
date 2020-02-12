@@ -24,5 +24,5 @@ parcel src/index.html
 # 打包发布
 
 ```
-yarn build
+parcel build
 ```
